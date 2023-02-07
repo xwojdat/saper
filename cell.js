@@ -6,33 +6,9 @@ function cell(i, j, w){
     this.x = i * w;
     this.y = j * w;
     this.w = w;
-    if(random(1) < 0.5){
-        this.mine = true;
-    }
-    else{
-        this.mine = false;
-    }
-    this.revealed = false;
-}
-
-cell.prototype.countMines = function(){
-    if(this.mine){
-        return -1;
-    }
-
-    var total = 0;
-
-    
-
-    for (var i = -1; i<=1; i++){
-        for (var j = -1; j<=1; j++){
-            var neighbor = grid[this.i+i] [this.j+j];
-            if(neighbor.mine){
-                total++;
-            }
-        }
-    }
-    return total;
+    this.neighborCount = 0;
+    this.mine = false;
+    this.revealed = true;
 }
 
 cell.prototype.show = function(){
@@ -49,8 +25,33 @@ cell.prototype.show = function(){
         else{
             fill(200);
             rect(this.x, this.y, this.w, this.w);
+            textAlign(CENTER);
+            fill(0);
+            text(this.neighborCount, this.x + this.w * 0.5, this.y + this.w-5);
         }
     }
+}
+
+cell.prototype.countMines = function(){
+    if(this.mine){
+        return -1;
+    }
+
+    var total = 0;
+
+    for (var xoff = -1; xoff <= 1; xoff++){
+        for (var yoff = -1; yoff <= 1; yoff++){
+            var i = this.i + xoff;
+            var j = this.j + yoff;
+            if(i > -1 && i < cols && j > -1 && j < rows){
+                var neighbor = grid[i] [j];
+                if(neighbor.mine){
+                    total++;
+                }
+            }
+        }
+    }
+    this.neighborCount = total;
 }
 
 cell.prototype.contains = function(x, y){
