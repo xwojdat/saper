@@ -32,3 +32,11 @@ cell.prototype.show = function(){
         }
     }
 }
+
+cell.prototype.contains = function(x, y){
+    return (x > this.x && x< this.x + this.w && y > this.y && y < this.y + this.w);
+}
+
+cell.prototype.reveal = function(x, y){
+    this.revealed = true;
+}
