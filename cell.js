@@ -15,6 +15,20 @@ function cell(i, j, w){
     this.revealed = false;
 }
 
+cell.prototype.countMines = function(){
+    if(this.mine){
+        return -1;
+    }
+
+    var total = 0;
+
+    for (var i = -1; i<=1; i++){
+        for (var j = -1; j<=1; j++){
+            var neighbor = grid[this.i+i] [this.j+j];
+        }
+    }
+}
+
 cell.prototype.show = function(){
     
     stroke(0);
