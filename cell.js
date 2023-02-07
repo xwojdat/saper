@@ -22,11 +22,17 @@ cell.prototype.countMines = function(){
 
     var total = 0;
 
+    
+
     for (var i = -1; i<=1; i++){
         for (var j = -1; j<=1; j++){
             var neighbor = grid[this.i+i] [this.j+j];
+            if(neighbor.mine){
+                total++;
+            }
         }
     }
+    return total;
 }
 
 cell.prototype.show = function(){
