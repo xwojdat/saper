@@ -15,3 +15,20 @@ function cell(i, j, w){
     this.revealed = false;
 }
 
+cell.prototype.show = function(){
+    
+    stroke(0);
+    noFill();
+    rect(this.x, this.y, this.w, this.w);
+    if(this.revealed){
+        if(this.mine){
+            stroke(0);
+            fill(127);
+            ellipse(this.x + this.w * 0.5, this.y + this.w * 0.5, this.w * 0.5);
+        }
+        else{
+            fill(200);
+            rect(this.x, this.y, this.w, this.w);
+        }
+    }
+}
