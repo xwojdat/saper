@@ -32,8 +32,11 @@ function setup(){
     console.log(options);
 
     for(var n = 0; n< totalMines; n++){
-        var i = floor(random(cols));
-        var j = floor(random(rows));
+        var index  = floor(random(options.length));
+        var choice = options[index];
+        var i = choice[0];
+        var j = choice[1];
+        options.splice(index, 1);
         grid[i][j].mine = true;
     }
     
